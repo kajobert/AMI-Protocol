@@ -1,0 +1,32 @@
+name: AMI Protocol CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  envelope-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Parse JSON schema
+        run: python -m json.tool schemas/envelope.schema.json > /dev/null
+
+      - name: Parse example
+        run: python -m json.tool examples/task-envelope.json > /dev/null
+
+      - name: Validate example contract
+        run: python tools/check_example.py

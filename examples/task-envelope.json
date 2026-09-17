@@ -1,0 +1,19 @@
+{
+  "ami": "0.1-experiment",
+  "id": "msg-demo-001",
+  "kind": "task",
+  "sender": {
+    "node_id": "github:kajobert/AMI-Protocol"
+  },
+  "created_at": "2026-09-17T19:15:00Z",
+  "payload": {
+    "task_type": "interop.echo",
+    "input": "Trust instead of Authority"
+  },
+  "provenance": [
+    {
+      "type": "spec",
+      "ref": "spec/0001-envelope.md"
+    }
+  ]
+}
