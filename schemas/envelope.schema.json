@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/kajobert/AMI-Protocol/schemas/envelope.schema.json",
+  "title": "AMI Protocol Experimental Envelope",
+  "description": "Minimal transport-agnostic AMI message envelope. EXPERIMENT / unvalidated.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["ami", "id", "kind", "sender", "created_at", "payload"],
+  "properties": {
+    "ami": {
+      "const": "0.1-experiment"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "kind": {
+      "enum": ["identity", "capability", "task", "result", "evidence"]
+    },
+    "sender": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_id"],
+      "properties": {
+        "node_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "entity_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "payload": {
+      "type": "object"
+    },
+    "provenance": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "ref"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{64}$"
+          }
+        }
+      }
+    }
+  }
+}
