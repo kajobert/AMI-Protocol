@@ -1,0 +1,15 @@
+ecosystem: AMI
+name: AMI-Protocol
+kind: capability
+parent: kajobert/AMI
+status: DESIGN
+lifecycle: CURRENT
+visibility: public
+autonomous_growth: false
+principle: Trust instead of Authority
+first_envelopes:
+  - identity
+  - capability
+  - task
+  - result
+  - evidence
